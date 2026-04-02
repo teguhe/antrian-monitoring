@@ -49,3 +49,7 @@ Route::get('/ambilnomor', function () {
 Route::get('/monitoring', function () {
     return view('monitoring');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
