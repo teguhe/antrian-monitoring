@@ -53,3 +53,7 @@ Route::get('/monitoring', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+use App\Http\Controllers\UserController;
+
+Route::resource('/user', UserController::class);
