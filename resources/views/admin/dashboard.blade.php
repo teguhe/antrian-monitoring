@@ -18,17 +18,7 @@
         <!-- ========== MAIN CONTENT ========== -->
         <div class="flex-1 flex flex-col">
 
-            <!-- TOP NAVBAR -->
-            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6">
-                <h1 class="font-bold text-gray-800">Dashboard Super Admin</h1>
-                <div class="flex items-center gap-4">
-                    <span>Halo, {{ auth()->user()->name }}</span>
-                    <form method="POST" action="{{ route('logout') }}" class="inline">
-                        @csrf
-                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-sm">Logout</button>
-                    </form>
-                </div>
-            </header>
+            @include('layouts.admin-header', ['title' => '📊 Dashboard Super Admin'])
 
             <!-- PAGE CONTENT -->
             <main class="p-6">

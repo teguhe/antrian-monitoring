@@ -16,14 +16,7 @@
     @include('layouts.admin-sidebar')
 
     <div class="flex flex-col flex-1 min-h-screen">
-        {{-- Header --}}
-        <header class="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-5 shadow-lg">
-            <div class="container mx-auto px-4">
-                <h1 class="text-xl font-bold tracking-wide uppercase">
-                    📋 TENTANG APLIKASI
-                </h1>
-            </div>
-        </header>
+        @include('layouts.admin-header', ['title' => '📋 TENTANG APLIKASI'])
 
         {{-- Main Content --}}
         <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl">
