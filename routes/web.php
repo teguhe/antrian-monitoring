@@ -82,3 +82,7 @@ Route::post('/logout', function () {
     auth()->logout();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/about', function () {
+    return view('about');
+});

@@ -28,6 +28,9 @@
         <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
             <span>⚙️</span> <span class="sidebar-text">Pengaturan</span>
         </a>
+        <a href="/about" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('about') ? 'bg-blue-50 text-blue-600' : '' }}">
+            <span>ℹ️</span> <span class="sidebar-text">Tentang Aplikasi</span>
+        </a>
     </nav>
 </aside>
 
