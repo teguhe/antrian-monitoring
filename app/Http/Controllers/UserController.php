@@ -23,13 +23,17 @@ class UserController extends Controller
             'role' => 'required|string|in:admin,operator,viewer',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
             'is_active' => true,
         ]);
+
+        if(request()->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'User berhasil ditambahkan', 'user' => $user]);
+        }
 
         return back()->with('success', 'User berhasil ditambahkan');
     }
@@ -51,6 +55,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        
+        if(request()->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'User berhasil dihapus']);
+        }
+        
         return back()->with('success', 'User berhasil dihapus');
     }
 
