@@ -86,3 +86,7 @@ Route::post('/logout', function () {
 Route::get('/about', function () {
     return view('about');
 });
+
+use App\Http\Controllers\TenantController;
+
+Route::get('/tenant', [TenantController::class, 'index']);

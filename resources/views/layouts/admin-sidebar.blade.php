@@ -13,7 +13,7 @@
         <a href="/user" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('user*') ? 'bg-blue-50 text-blue-600' : '' }}">
             <span>👥</span> <span class="sidebar-text">Manajemen User</span>
         </a>
-        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
+        <a href="/tenant" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('tenant') ? 'bg-blue-50 text-blue-600' : '' }}">
             <span>🏘️</span> <span class="sidebar-text">Manajemen Tenant</span>
         </a>
         <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
