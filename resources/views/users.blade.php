@@ -16,13 +16,17 @@
     @include('layouts.admin-sidebar')
 
     <div class="flex flex-col flex-1 min-h-screen">
-        @include('layouts.admin-header', [
-            'title' => '👥 MANAJEMEN USER',
-            'rightButton' => '<button class="bg-white text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg font-semibold transition duration-200 shadow">+ Tambah User</button>'
-        ])
+        @include('layouts.admin-header', ['title' => '👥 MANAJEMEN USER'])
 
         {{-- Main Content --}}
         <main class="flex-grow container mx-auto px-4 py-6">
+
+            <!-- Tombol Action -->
+            <div class="mb-5 flex justify-end">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-semibold transition duration-200 shadow">
+                    + Tambah User
+                </button>
+            </div>
 
         {{-- Filter & Search Bar --}}
         <div class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
