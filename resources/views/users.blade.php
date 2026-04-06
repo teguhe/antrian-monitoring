@@ -34,9 +34,9 @@
                 <input type="text" placeholder="Cari nama / email..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <select class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
                     <option>Semua Role</option>
+                    <option>Super Admin</option>
                     <option>Admin</option>
-                    <option>Operator</option>
-                    <option>Viewer</option>
+                    <option>Admin Loket</option>
                 </select>
                 <select class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
                     <option>Semua Status</option>
@@ -63,7 +63,7 @@
                     <tr class="hover:bg-slate-50 transition">
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
+                                <div class="w-9 h-9 rounded-full bg-purple-700 text-white flex items-center justify-center font-bold">
                                     TP
                                 </div>
                                 <span class="font-medium text-slate-800">Teguh Prasetyo</span>
@@ -71,12 +71,58 @@
                         </td>
                         <td class="px-4 py-3 text-slate-600">admin@example.com</td>
                         <td class="px-4 py-3">
-                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 font-semibold">Admin</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800 font-semibold">Super Admin</span>
                         </td>
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
                         </td>
                         <td class="px-4 py-3 text-slate-500 text-sm">2 Apr 2026 13:15</td>
+                        <td class="px-4 py-3 text-right">
+                            <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
+                            <span class="mx-2 text-slate-300">|</span>
+                            <button class="text-gray-400 cursor-not-allowed font-medium text-sm" disabled title="Super Admin tidak bisa dihapus">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="px-4 py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
+                                    AS
+                                </div>
+                                <span class="font-medium text-slate-800">Admin Aplikasi</span>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-slate-600">admin.app@example.com</td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 font-semibold">Admin</span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
+                        </td>
+                        <td class="px-4 py-3 text-slate-500 text-sm">5 Apr 2026 09:05</td>
+                        <td class="px-4 py-3 text-right">
+                            <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
+                            <span class="mx-2 text-slate-300">|</span>
+                            <button class="text-red-600 hover:text-red-800 font-medium text-sm">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="px-4 py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold">
+                                    OL
+                                </div>
+                                <span class="font-medium text-slate-800">Operator Loket 01</span>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-slate-600">loket01@example.com</td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 text-xs rounded-full bg-teal-100 text-teal-800 font-semibold">Admin Loket</span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
+                        </td>
+                        <td class="px-4 py-3 text-slate-500 text-sm">6 Apr 2026 07:45</td>
                         <td class="px-4 py-3 text-right">
                             <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
                             <span class="mx-2 text-slate-300">|</span>
