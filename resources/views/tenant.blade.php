@@ -31,12 +31,11 @@
         {{-- Filter & Search Bar --}}
         <div class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
             <div class="flex gap-3 flex-wrap">
-                <input type="text" placeholder="Cari nama / email..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <select class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
-                    <option>Semua Role</option>
-                    <option>Super Admin</option>
-                    <option>Admin</option>
-                    <option>Admin Loket</option>
+                <input type="text" id="cariTenant" placeholder="Cari nama tenant / prefix..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="filterStatus" class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
+                    <option>Semua Status</option>
+                    <option>Aktif</option>
+                    <option>Non Aktif</option>
                 </select>
                 <select class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
                     <option>Semua Status</option>
@@ -85,7 +84,7 @@
                         <td class="px-4 py-3 text-right">
                             <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
                             <span class="mx-2 text-slate-300">|</span>
-                            <button class="text-red-700 hover:text-red-900 font-medium text-sm">Hapus</button>
+                            <button onclick="hapusTenant({{ $tenant->tenant_id }})" class="text-red-700 hover:text-red-900 font-medium text-sm">Hapus</button>
                         </td>
                     </tr>
                     @endforeach
@@ -103,5 +102,46 @@
         </footer>
     </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputCari = document.getElementById('cariTenant');
+        const filterStatus = document.getElementById('filterStatus');
+        const barisTabel = document.querySelectorAll('tbody tr');
+
+        function filterData() {
+            const kataKunci = inputCari.value.toLowerCase().trim();
+            const statusPilih = filterStatus.value;
+
+            barisTabel.forEach(baris => {
+                const teksBaris = baris.textContent.toLowerCase();
+                const statusBaris = baris.querySelector('span:nth-last-child(2)')?.textContent.trim() || '';
+
+                const cocokCari = !kataKunci || teksBaris.includes(kataKunci);
+                const cocokStatus = statusPilih === 'Semua Status' || statusBaris === statusPilih;
+
+                baris.style.display = (cocokCari && cocokStatus) ? '' : 'none';
+            });
+        }
+
+        inputCari.addEventListener('input', filterData);
+        filterStatus.addEventListener('change', filterData);
+    });
+</script>
+
 </body>
 </html>
+
+<script>
+function hapusTenant(id) {
+    if(confirm('Yakin mau hapus tenant ini?')) {
+        fetch('/tenant/' + id, {
+            method: 'DELETE',
+            headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content}
+        }).then(res => res.json()).then(data => {
+            if(data.success) alert(data.message);
+            location.reload();
+        });
+    }
+}
+</script>
+

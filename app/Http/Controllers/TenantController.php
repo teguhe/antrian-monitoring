@@ -12,4 +12,12 @@ class TenantController extends Controller
         $tenants = Tenant::all();
         return view('tenant', compact('tenants'));
     }
+
+    public function destroy($id)
+    {
+        $tenant = Tenant::findOrFail($id);
+        $tenant->delete();
+
+        return response()->json(['success' => true, 'message' => 'Tenant berhasil dihapus']);
+    }
 }
