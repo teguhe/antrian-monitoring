@@ -10,24 +10,28 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex">
 
-    {{-- Header --}}
-    <header class="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-5 shadow-lg">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold tracking-wide uppercase">
-                    MANAJEMEN USER
-                </h1>
-                <button class="bg-white text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg font-semibold transition duration-200 shadow">
-                    + Tambah User
-                </button>
+    {{-- Include Sidebar --}}
+    @include('layouts.admin-sidebar')
+
+    <div class="flex flex-col flex-1 min-h-screen">
+        {{-- Header --}}
+        <header class="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-5 shadow-lg">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl font-bold tracking-wide uppercase">
+                        MANAJEMEN USER
+                    </h1>
+                    <button class="bg-white text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg font-semibold transition duration-200 shadow">
+                        + Tambah User
+                    </button>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    {{-- Main Content --}}
-    <main class="flex-grow container mx-auto px-4 py-6">
+        {{-- Main Content --}}
+        <main class="flex-grow container mx-auto px-4 py-6">
 
         {{-- Filter & Search Bar --}}
         <div class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
@@ -90,12 +94,13 @@
 
     </main>
 
-    {{-- Footer --}}
-    <footer class="bg-slate-800 text-slate-400 py-3">
-        <div class="container mx-auto px-2 text-center text-xs">
-            © {{ date('Y') }} Mal Pelayanan Publik Kota Salatiga
-        </div>
-    </footer>
+        {{-- Footer --}}
+        <footer class="bg-slate-800 text-slate-400 py-3">
+            <div class="container mx-auto px-2 text-center text-xs">
+                © {{ date('Y') }} Mal Pelayanan Publik Kota Salatiga
+            </div>
+        </footer>
+    </div>
 
 </body>
 </html>

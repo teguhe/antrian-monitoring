@@ -26,13 +26,19 @@
         <div class="w-full max-w-md">
             <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
 
-                <form method="POST" action="">
+                <form method="POST" action="/login">
                     @csrf
 
-                    {{-- Username --}}
+                    @error('email')
+                        <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    {{-- Email --}}
                     <div class="mb-5">
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
-                        <input type="text" name="username" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan username">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                        <input type="email" name="email" value="admin@antrian.local" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan email">
                     </div>
 
                     {{-- Password --}}
