@@ -16,8 +16,8 @@
         <a href="/tenant" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('tenant') ? 'bg-blue-50 text-blue-600' : '' }}">
             <span>🏘️</span> <span class="sidebar-text">Manajemen Tenant</span>
         </a>
-        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
-            <span>🏢</span> <span class="sidebar-text">Manajemen Loket</span>
+        <a href="/loket" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('loket*') ? 'bg-blue-50 text-blue-600' : '' }}">
+            <span>🪑</span> <span class="sidebar-text">Manajemen Loket</span>
         </a>
         <a href="/monitoring" target="_blank" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
             <span>🖥️</span> <span class="sidebar-text">Layar Monitoring</span>

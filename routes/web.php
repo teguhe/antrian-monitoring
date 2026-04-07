@@ -91,3 +91,9 @@ Route::get('/about', function () {
 use App\Http\Controllers\TenantController;
 
 Route::get('/tenant', [TenantController::class, 'index']);
+
+use App\Http\Controllers\LoketController;
+
+Route::get('/loket', [LoketController::class, 'index'])->name('loket.index');
+Route::delete('/loket/{id}', [LoketController::class, 'destroy'])->name('loket.destroy');
+

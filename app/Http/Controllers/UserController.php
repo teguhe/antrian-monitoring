@@ -10,7 +10,15 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::latest()->paginate(15);
+        $users = User::orderByRaw("CASE role 
+            WHEN 'superadmin' THEN 1 
+            WHEN 'admin' THEN 2 
+            WHEN 'admin_loket' THEN 3 
+            ELSE 4 
+        END")
+        ->orderBy('name', 'asc')
+        ->paginate(15);
+        
         return view('users', compact('users'));
     }
 
