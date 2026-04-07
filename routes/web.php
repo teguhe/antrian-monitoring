@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/dashboard');
 });
 
 Route::get('/ambilnomor', function () {
@@ -73,7 +73,7 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 
-Route::middleware('auth')->group(function () {
+Route::middleware(App\Http\Middleware\SkipAuth::class)->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
     Route::resource('/user', UserController::class);
