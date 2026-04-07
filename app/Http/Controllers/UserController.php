@@ -8,17 +8,38 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderByRaw("CASE role 
+        $users = User::query();
+
+        // Search by nama atau email
+        if ($request->filled('search')) {
+            $users->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter role
+        if ($request->filled('role') && $request->role !== 'all') {
+            $users->where('role', $request->role);
+        }
+
+        // Filter status aktif/nonaktif
+        if ($request->filled('status') && $request->status !== 'all') {
+            $users->where('is_active', $request->status === 'active');
+        }
+
+        $users = $users->orderByRaw("CASE role 
             WHEN 'superadmin' THEN 1 
             WHEN 'admin' THEN 2 
             WHEN 'admin_loket' THEN 3 
             ELSE 4 
         END")
         ->orderBy('name', 'asc')
-        ->paginate(15);
-        
+        ->paginate(15)
+        ->appends($request->only(['search', 'role', 'status']));
+
         return view('users', compact('users'));
     }
 
