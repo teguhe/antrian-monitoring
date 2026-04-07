@@ -90,7 +90,7 @@ Route::get('/about', function () {
 
 use App\Http\Controllers\TenantController;
 
-Route::get('/tenant', [TenantController::class, 'index']);
+Route::get('/tenant', [TenantController::class, 'index'])->name('tenant.index');
 
 use App\Http\Controllers\LoketController;
 

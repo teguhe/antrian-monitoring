@@ -29,23 +29,24 @@
             </div>
 
         {{-- Filter & Search Bar --}}
-        <div class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
-            <div class="flex gap-3 flex-wrap">
-                <input type="text" id="cariTenant" placeholder="Cari nama tenant / prefix..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <select id="filterStatus" class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
-                    <option>Semua Status</option>
-                    <option>Aktif</option>
-                    <option>Non Aktif</option>
+        <form method="GET" action="{{ route('tenant.index') }}" class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
+            <div class="flex gap-3 flex-wrap items-center">
+                <input type="text" name="search" placeholder="Cari nama tenant / prefix..." value="{{ request('search') }}" class="flex-grow min-w-[200px] px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="status" class="px-4 py-2 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" {{ !request('status') ? 'selected' : '' }}>Semua Status</option>
+                    <option value="aktif" {{ request('status') === 'aktif' ? 'selected' : '' }}>Aktif</option>
+                    <option value="nonaktif" {{ request('status') === 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
-                <select class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
-                    <option>Semua Status</option>
-                    <option>Aktif</option>
-                    <option>Nonaktif</option>
-                </select>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition duration-200">
+                    🔍 Cari
+                </button>
+                <a href="{{ route('tenant.index') }}" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg font-medium transition duration-200">
+                    ✖ Reset
+                </a>
             </div>
-        </div>
+        </form>
 
-        {{-- User Table --}}
+        {{-- Tenant Table --}}
         <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
             <table class="w-full">
                 <thead>
@@ -61,7 +62,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @foreach($tenants as $no => $tenant)
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="px-4 py-3 font-medium text-slate-700">{{ $no + 1 }}</td>
+                        <td class="px-4 py-3 font-medium text-slate-700">{{ $tenants->firstItem() + $no }}</td>
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
@@ -78,7 +79,7 @@
                             @if($tenant->tenant_aktif == 1)
                             <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
                             @else
-                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Non Aktif</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Nonaktif</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-right">
@@ -90,6 +91,13 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{-- Pagination --}}
+            @if($tenants->hasPages())
+            <div class="flex justify-center items-center gap-1 px-4 py-3 border-t border-slate-200">
+                {{ $tenants->links() }}
+            </div>
+            @endif
         </div>
 
     </main>
@@ -101,35 +109,6 @@
             </div>
         </footer>
     </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputCari = document.getElementById('cariTenant');
-        const filterStatus = document.getElementById('filterStatus');
-        const barisTabel = document.querySelectorAll('tbody tr');
-
-        function filterData() {
-            const kataKunci = inputCari.value.toLowerCase().trim();
-            const statusPilih = filterStatus.value;
-
-            barisTabel.forEach(baris => {
-                const teksBaris = baris.textContent.toLowerCase();
-                const statusBaris = baris.querySelector('span:nth-last-child(2)')?.textContent.trim() || '';
-
-                const cocokCari = !kataKunci || teksBaris.includes(kataKunci);
-                const cocokStatus = statusPilih === 'Semua Status' || statusBaris === statusPilih;
-
-                baris.style.display = (cocokCari && cocokStatus) ? '' : 'none';
-            });
-        }
-
-        inputCari.addEventListener('input', filterData);
-        filterStatus.addEventListener('change', filterData);
-    });
-</script>
-
-</body>
-</html>
 
 <script>
 function hapusTenant(id) {
@@ -145,3 +124,5 @@ function hapusTenant(id) {
 }
 </script>
 
+</body>
+</html>

@@ -110,11 +110,12 @@
                             {{ $user->last_login_at ? $user->last_login_at->format('d M Y H:i') : '-' }}
                         </td>
                         <td class="px-4 py-3 text-right">
-                            <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
-                            <span class="mx-2 text-slate-300">|</span>
-                            @if($user->id == 1)
-                            @else
+                            @if($user->role !== 'superadmin')
+                                <button class="text-blue-700 hover:text-blue-900 font-medium text-sm">Edit</button>
+                                <span class="mx-2 text-slate-300">|</span>
                                 <button onclick="hapusUser({{ $user->id }})" class="text-red-600 hover:text-red-800 font-medium text-sm">Hapus</button>
+                            @else
+                                <span class="text-slate-300">-</span>
                             @endif
                         </td>
                     </tr>
