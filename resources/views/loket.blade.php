@@ -28,17 +28,30 @@
                 </button>
             </div>
 
-        {{-- Filter & Search Bar --}}
-        <div class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
-            <div class="flex gap-3 flex-wrap">
-                <input type="text" id="cariLoket" placeholder="Cari nama loket / tenant..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <select id="filterStatus" class="px-4 py-2 border border-slate-300 rounded-lg bg-white">
-                    <option>Semua Status</option>
-                    <option>Aktif</option>
-                    <option>Non Aktif</option>
+        {{-- Search & Filter --}}
+        <form method="GET" action="{{ route('loket.index') }}" class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
+            <div class="flex gap-3 flex-wrap items-center">
+                {{-- Search --}}
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama loket / tenant..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                {{-- Filter Status --}}
+                <select name="status" class="px-4 py-2 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Status</option>
+                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Aktif</option>
+                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
+
+                {{-- Tombol Cari --}}
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-semibold transition duration-200">
+                    Cari
+                </button>
+
+                {{-- Reset --}}
+                <a href="{{ route('loket.index') }}" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2 rounded-lg font-semibold transition duration-200">
+                    Reset
+                </a>
             </div>
-        </div>
+        </form>
 
         {{-- Loket Table --}}
         <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
@@ -54,9 +67,9 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
-                    @foreach($lokets as $no => $loket)
+                    @foreach($lokets as $loket)
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="px-4 py-3 font-medium text-slate-700">{{ $no + 1 }}</td>
+                        <td class="px-4 py-3 font-medium text-slate-700">{{ $lokets->firstItem() + $loop->index }}</td>
                         <td class="px-4 py-3 font-medium text-slate-800">{{ $loket->loket_nama }}</td>
                         <td class="px-4 py-3 text-slate-600">{{ $loket->tenant->tenant_nama ?? '-' }}</td>
                         <td class="px-4 py-3">
@@ -66,7 +79,7 @@
                             @if($loket->loket_aktif == 1)
                             <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
                             @else
-                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Non Aktif</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Nonaktif</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-right">
@@ -78,6 +91,17 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{-- Pagination --}}
+            @if($lokets->hasPages())
+            <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between">
+                <span class="text-sm text-slate-500">
+                    Menampilkan {{ $lokets->firstItem() }}–{{ $lokets->lastItem() }} dari {{ $lokets->total() }} loket
+                </span>
+                {{ $lokets->appends(request()->query())->links() }}
+            </div>
+            @endif
+
         </div>
 
     </main>
@@ -89,35 +113,6 @@
             </div>
         </footer>
     </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputCari = document.getElementById('cariLoket');
-        const filterStatus = document.getElementById('filterStatus');
-        const barisTabel = document.querySelectorAll('tbody tr');
-
-        function filterData() {
-            const kataKunci = inputCari.value.toLowerCase().trim();
-            const statusPilih = filterStatus.value;
-
-            barisTabel.forEach(baris => {
-                const teksBaris = baris.textContent.toLowerCase();
-                const statusBaris = baris.querySelector('span:nth-last-child(2)')?.textContent.trim() || '';
-
-                const cocokCari = !kataKunci || teksBaris.includes(kataKunci);
-                const cocokStatus = statusPilih === 'Semua Status' || statusBaris === statusPilih;
-
-                baris.style.display = (cocokCari && cocokStatus) ? '' : 'none';
-            });
-        }
-
-        inputCari.addEventListener('input', filterData);
-        filterStatus.addEventListener('change', filterData);
-    });
-</script>
-
-</body>
-</html>
 
 <script>
 function hapusLoket(id) {
@@ -132,3 +127,6 @@ function hapusLoket(id) {
     }
 }
 </script>
+
+</body>
+</html>
