@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Loket - Antrian MPP</title>
@@ -10,7 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex">
 
     {{-- Include Sidebar --}}
     @include('layouts.admin-sidebar')
@@ -29,7 +32,7 @@
             </div>
 
         {{-- Search & Filter --}}
-        <form method="GET" action="{{ route('loket.index') }}" class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
+        <form method="GET" action="{{ route('loket.index') }}" class="bg-white dark:bg-slate-800 rounded-xl shadow border border-slate-200 dark:border-slate-700 p-4 mb-6">
             <div class="flex gap-3 flex-wrap items-center">
                 {{-- Search --}}
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama loket / tenant..." class="flex-grow px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -47,39 +50,39 @@
                 </button>
 
                 {{-- Reset --}}
-                <a href="{{ route('loket.index') }}" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2 rounded-lg font-semibold transition duration-200">
+                <a href="{{ route('loket.index') }}" class="bg-slate-200 hover:bg-slate-300 text-slate-700 dark:text-slate-200 px-5 py-2 rounded-lg font-semibold transition duration-200">
                     Reset
                 </a>
             </div>
         </form>
 
         {{-- Loket Table --}}
-        <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow border border-slate-200 dark:border-slate-700 overflow-hidden">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">No</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Nama Loket</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Tenant</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Nomor Loket</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Status</th>
-                        <th class="px-4 py-3 text-right text-sm font-semibold text-slate-700">Aksi</th>
+                    <tr class="bg-slate-50 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600">
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">No</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Nama Loket</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Tenant</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Nomor Loket</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Status</th>
+                        <th class="px-4 py-3 text-right text-sm font-semibold text-slate-700 dark:text-slate-200">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                     @foreach($lokets as $loket)
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-4 py-3 font-medium text-slate-700">{{ $lokets->firstItem() + $loop->index }}</td>
-                        <td class="px-4 py-3 font-medium text-slate-800">{{ $loket->loket_nama }}</td>
-                        <td class="px-4 py-3 text-slate-600">{{ $loket->tenant->tenant_nama ?? '-' }}</td>
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition">
+                        <td class="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">{{ $lokets->firstItem() + $loop->index }}</td>
+                        <td class="px-4 py-3 font-medium text-slate-800 dark:text-white">{{ $loket->loket_nama }}</td>
+                        <td class="px-4 py-3 text-slate-600 dark:text-slate-300">{{ $loket->tenant->tenant_nama ?? '-' }}</td>
                         <td class="px-4 py-3">
-                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 font-mono font-semibold">{{ $loket->loket_nomor }}</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 font-mono font-semibold">{{ $loket->loket_nomor }}</span>
                         </td>
                         <td class="px-4 py-3">
                             @if($loket->loket_aktif == 1)
-                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 font-semibold">Aktif</span>
                             @else
-                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Nonaktif</span>
+                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 font-semibold">Nonaktif</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-right">
@@ -94,8 +97,8 @@
 
             {{-- Pagination --}}
             @if($lokets->hasPages())
-            <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between">
-                <span class="text-sm text-slate-500">
+            <div class="px-4 py-3 border-t border-slate-200 dark:border-slate-600 flex items-center justify-between">
+                <span class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-400">
                     Menampilkan {{ $lokets->firstItem() }}–{{ $lokets->lastItem() }} dari {{ $lokets->total() }} loket
                 </span>
                 {{ $lokets->appends(request()->query())->links() }}
@@ -107,7 +110,7 @@
     </main>
 
         {{-- Footer --}}
-        <footer class="bg-slate-800 text-slate-400 py-3">
+        <footer class="bg-slate-800 dark:bg-slate-950 text-slate-400 py-3">
             <div class="container mx-auto px-2 text-center text-xs">
                 © {{ date('Y') }} Mal Pelayanan Publik Kota Salatiga
             </div>

@@ -1,34 +1,34 @@
 
 <!-- ===== SIDEBAR ADMIN PARTIAL ===== -->
-<aside id="sidebar" class="w-64 bg-white shadow-lg flex-shrink-0">
-    <div class="h-16 flex items-center justify-between px-4 border-b">
-        <h2 id="sidebar-title" class="font-bold text-lg">📋 Antrian</h2>
-        <button onclick="toggleSidebar()" class="text-gray-500 hover:text-gray-800 text-xl">☰</button>
+<aside id="sidebar" class="w-64 bg-white dark:bg-slate-800 shadow-lg flex-shrink-0 border-r border-slate-200 dark:border-slate-700">
+    <div class="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700">
+        <h2 id="sidebar-title" class="font-bold text-lg dark:text-white">📋 Antrian</h2>
+        <button onclick="toggleSidebar()" class="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 text-xl">☰</button>
     </div>
 
     <nav class="p-3 space-y-1">
-        <a href="/dashboard" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('dashboard') ? 'bg-blue-50 text-blue-600' : '' }}">
+        <a href="/dashboard" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 {{ request()->is('dashboard') ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : '' }}">
             <span>📊</span> <span class="sidebar-text">Dashboard</span>
         </a>
-        <a href="/user" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('user*') ? 'bg-blue-50 text-blue-600' : '' }}">
+        <a href="/user" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 {{ request()->is('user*') ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : '' }}">
             <span>👥</span> <span class="sidebar-text">Manajemen User</span>
         </a>
-        <a href="/tenant" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('tenant') ? 'bg-blue-50 text-blue-600' : '' }}">
+        <a href="/tenant" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 {{ request()->is('tenant') ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : '' }}">
             <span>🏘️</span> <span class="sidebar-text">Manajemen Tenant</span>
         </a>
-        <a href="/loket" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('loket*') ? 'bg-blue-50 text-blue-600' : '' }}">
+        <a href="/loket" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 {{ request()->is('loket*') ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : '' }}">
             <span>🪑</span> <span class="sidebar-text">Manajemen Loket</span>
         </a>
-        <a href="/monitoring" target="_blank" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
+        <a href="/monitoring" target="_blank" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200">
             <span>🖥️</span> <span class="sidebar-text">Layar Monitoring</span>
         </a>
-        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
+        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200">
             <span>📈</span> <span class="sidebar-text">Laporan</span>
         </a>
-        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700">
+        <a href="#" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200">
             <span>⚙️</span> <span class="sidebar-text">Pengaturan</span>
         </a>
-        <a href="/about" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 text-gray-700 {{ request()->is('about') ? 'bg-blue-50 text-blue-600' : '' }}">
+        <a href="/about" class="flex items-center gap-3 p-3 rounded hover:bg-blue-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 {{ request()->is('about') ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : '' }}">
             <span>ℹ️</span> <span class="sidebar-text">Tentang Aplikasi</span>
         </a>
     </nav>

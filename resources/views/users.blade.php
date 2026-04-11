@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen User - Antrian MPP</title>
@@ -10,7 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex">
 
     {{-- Include Sidebar --}}
     @include('layouts.admin-sidebar')
@@ -29,7 +32,7 @@
             </div>
 
         {{-- Search & Filter --}}
-        <form method="GET" action="{{ route('user.index') }}" class="bg-white rounded-xl shadow border border-slate-200 p-4 mb-6">
+        <form method="GET" action="{{ route('user.index') }}" class="bg-white dark:bg-slate-800 rounded-xl shadow border border-slate-200 dark:border-slate-700 p-4 mb-6">
             <div class="flex gap-3 flex-wrap items-center">
                 {{-- Search --}}
                 <div class="flex-1 min-w-[200px]">
@@ -54,41 +57,41 @@
                     <option value="inactive" {{ request('status') === 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
                 {{-- Reset --}}
-                <a href="{{ route('user.index') }}" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-medium transition">
+                <a href="{{ route('user.index') }}" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium transition">
                     Reset
                 </a>
             </div>
         </form>
 
         {{-- User Table --}}
-        <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow border border-slate-200 dark:border-slate-700 overflow-hidden">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="px-3 py-3 text-center text-sm font-semibold text-slate-700 w-16">No</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Nama</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Email</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Role</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Status</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Login Terakhir</th>
-                        <th class="px-4 py-3 text-right text-sm font-semibold text-slate-700">Aksi</th>
+                    <tr class="bg-slate-50 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600">
+                        <th class="px-3 py-3 text-center text-sm font-semibold text-slate-700 dark:text-slate-200 w-16">No</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Nama</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Email</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Role</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Status</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200">Login Terakhir</th>
+                        <th class="px-4 py-3 text-right text-sm font-semibold text-slate-700 dark:text-slate-200">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                     @foreach($users as $key => $user)
-                    <tr class="hover:bg-slate-50 transition" data-role="{{ $user->role }}">
-                        <td class="px-3 py-3 text-center font-semibold text-slate-500">{{ $loop->iteration }}</td>
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-role="{{ $user->role }}">
+                        <td class="px-3 py-3 text-center font-semibold text-slate-500 dark:text-slate-400">{{ $loop->iteration }}</td>
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-full bg-gray-700 text-white flex items-center justify-center font-bold">
                                     {{ strtoupper(substr($user->name, 0, 2)) }}
                                 </div>
-                                <span class="font-medium text-slate-800">{{ $user->name }}</span>
+                                <span class="font-medium text-slate-800 dark:text-white">{{ $user->name }}</span>
                             </div>
                         </td>
-                        <td class="px-4 py-3 text-slate-600">{{ $user->email }}</td>
+                        <td class="px-4 py-3 text-slate-600 dark:text-slate-300">{{ $user->email }}</td>
                         <td class="px-4 py-3">
-                            <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800 font-semibold">
+                            <span class="px-2 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold">
                                 @php
                                     $roleLabel = [
                                         'superadmin' => 'Super Admin',
@@ -101,12 +104,12 @@
                         </td>
                         <td class="px-4 py-3">
                             @if($user->is_active)
-                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-semibold">Aktif</span>
+                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 font-semibold">Aktif</span>
                             @else
-                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 font-semibold">Nonaktif</span>
+                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 font-semibold">Nonaktif</span>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-slate-500 text-sm">
+                        <td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-sm">
                             {{ $user->last_login_at ? $user->last_login_at->format('d M Y H:i') : '-' }}
                         </td>
                         <td class="px-4 py-3 text-right">
@@ -123,7 +126,7 @@
 
                     @if($users->isEmpty())
                     <tr>
-                        <td colspan="7" class="px-4 py-8 text-center text-slate-500">
+                        <td colspan="7" class="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
                             Belum ada user terdaftar
                         </td>
                     </tr>
@@ -135,7 +138,7 @@
     </main>
 
         {{-- Footer --}}
-        <footer class="bg-slate-800 text-slate-400 py-3">
+        <footer class="bg-slate-800 dark:bg-slate-950 text-slate-400 py-3">
             <div class="container mx-auto px-2 text-center text-xs">
                 © {{ date('Y') }} Mal Pelayanan Publik Kota Salatiga
             </div>
@@ -146,27 +149,27 @@
 </script>
 
 <div id="modalTambahUser" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
-        <h3 class="text-lg font-bold text-slate-800 mb-4">➕ Tambah User Baru</h3>
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-md p-6">
+        <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4">➕ Tambah User Baru</h3>
         <form id="formTambahUser" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Nama Lengkap</label>
                 <input type="text" name="name" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Email</label>
                 <input type="email" name="email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Password</label>
                 <input type="password" name="password" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Konfirmasi Password</label>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Konfirmasi Password</label>
                 <input type="password" name="password_confirmation" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Role</label>
                 <select name="role" required class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="admin">
 /option>

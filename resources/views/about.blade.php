@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang Aplikasi - Antrian MPP</title>
@@ -10,7 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex">
 
     {{-- Include Sidebar --}}
     @include('layouts.admin-sidebar')
@@ -21,18 +24,18 @@
         {{-- Main Content --}}
         <main class="flex-grow container mx-auto px-4 py-6 max-w-4xl">
 
-            <div class="bg-white rounded-xl shadow border border-slate-200 p-8 space-y-6">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow border border-slate-200 dark:border-slate-700 p-8 space-y-6">
 
-                <div class="text-center pb-6 border-b border-slate-200">
+                <div class="text-center pb-6 border-b border-slate-200 dark:border-slate-700">
                     <div class="text-6xl mb-3">📋</div>
-                    <h2 class="text-2xl font-bold text-slate-800">Sistem Antrian Digital MPP</h2>
-                    <p class="text-slate-500">Mal Pelayanan Publik Kota Salatiga</p>
-                    <div class="mt-2 inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                    <h2 class="text-2xl font-bold text-slate-800 dark:text-white">Sistem Antrian Digital MPP</h2>
+                    <p class="text-slate-500 dark:text-slate-400">Mal Pelayanan Publik Kota Salatiga</p>
+                    <div class="mt-2 inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
                         Versi 1.0.0
                     </div>
                 </div>
 
-                <div class="space-y-4 text-slate-700 leading-relaxed">
+                <div class="space-y-4 text-slate-700 dark:text-slate-200 leading-relaxed">
                     <p>
                         <strong>Sistem Antrian Digital</strong> adalah aplikasi manajemen antrian terpadu yang dikembangkan untuk
                         memudahkan pelayanan masyarakat di Mal Pelayanan Publik Kota Salatiga.
@@ -44,7 +47,7 @@
                         dan memantau waktu tunggu estimasi.
                     </p>
 
-                    <h3 class="text-lg font-bold text-slate-800 pt-2">✨ Fitur Utama</h3>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white pt-2">✨ Fitur Utama</h3>
 
                     <ul class="space-y-2 ml-5 list-disc">
                         <li>Pengambilan nomor antrian otomatis</li>
@@ -55,13 +58,13 @@
                         <li>Multi tenant / SKPD</li>
                     </ul>
 
-                    <h3 class="text-lg font-bold text-slate-800 pt-2">🏛️ Dibangun Oleh</h3>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white pt-2">🏛️ Dibangun Oleh</h3>
                     <p>
                         Dinas Komunikasi dan Informatika Kota Salatiga<br>
                         Tahun Pengembangan: 2026
                     </p>
 
-                    <div class="pt-4 text-center text-sm text-slate-500 border-t border-slate-200 mt-6">
+                    <div class="pt-4 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 mt-6">
                         © {{ date('Y') }} Pemerintah Kota Salatiga. Seluruh hak cipta dilindungi.
                     </div>
                 </div>
@@ -71,7 +74,7 @@
         </main>
 
         {{-- Footer --}}
-        <footer class="bg-slate-800 text-slate-400 py-3">
+        <footer class="bg-slate-800 dark:bg-slate-950 text-slate-400 py-3">
             <div class="container mx-auto px-2 text-center text-xs">
                 © {{ date('Y') }} Mal Pelayanan Publik Kota Salatiga
             </div>
