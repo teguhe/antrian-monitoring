@@ -177,7 +177,6 @@
             <button type="button" onclick="tutupModalEdit()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-2xl leading-none">&times;</button>
         </div>
         <form id="formEdit" class="p-6 space-y-4">
-            <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="tenant_id" id="edit_tenant_id">
             <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Nama Tenant <span class="text-red-500">*</span></label>
@@ -280,7 +279,7 @@ document.getElementById('formEdit').addEventListener('submit', function(e) {
     const params = new URLSearchParams(new FormData(form));
 
     fetch('/tenant/' + id, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
             'Accept': 'application/json',
