@@ -33,6 +33,56 @@ class TenantController extends Controller
         return view('tenant', compact('tenants'));
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'tenant_nama' => 'required|string|max:255',
+            'tenant_urusan' => 'nullable|string|max:255',
+            'tenant_prefix' => 'required|string|max:5',
+            'tenant_keterangan' => 'nullable|string',
+            'tenant_aktif' => 'nullable|in:1',
+        ]);
+
+        $tenant = Tenant::create([
+            'tenant_nama' => $validated['tenant_nama'],
+            'tenant_urusan' => $validated['tenant_urusan'] ?? null,
+            'tenant_prefix' => strtoupper($validated['tenant_prefix']),
+            'tenant_keterangan' => $validated['tenant_keterangan'] ?? null,
+            'tenant_aktif' => $request->has('tenant_aktif') ? 1 : 0,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tenant berhasil ditambahkan'
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $tenant = Tenant::findOrFail($id);
+
+        $validated = $request->validate([
+            'tenant_nama' => 'required|string|max:255',
+            'tenant_urusan' => 'nullable|string|max:255',
+            'tenant_prefix' => 'required|string|max:5',
+            'tenant_keterangan' => 'nullable|string',
+            'tenant_aktif' => 'nullable|in:1',
+        ]);
+
+        $tenant->update([
+            'tenant_nama' => $validated['tenant_nama'],
+            'tenant_urusan' => $validated['tenant_urusan'] ?? null,
+            'tenant_prefix' => strtoupper($validated['tenant_prefix']),
+            'tenant_keterangan' => $validated['tenant_keterangan'] ?? null,
+            'tenant_aktif' => $request->has('tenant_aktif') ? 1 : 0,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tenant berhasil diupdate'
+        ]);
+    }
+
     public function destroy($id)
     {
         $tenant = Tenant::findOrFail($id);
