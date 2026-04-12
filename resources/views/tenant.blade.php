@@ -276,15 +276,17 @@ document.getElementById('formTambah').addEventListener('submit', function(e) {
 document.getElementById('formEdit').addEventListener('submit', function(e) {
     e.preventDefault();
     const id = document.getElementById('edit_tenant_id').value;
-    const formData = new FormData(this);
+    const form = document.getElementById('formEdit');
+    const params = new URLSearchParams(new FormData(form));
 
     fetch('/tenant/' + id, {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: formData
+        body: params.toString()
     })
     .then(res => res.json())
     .then(data => {
